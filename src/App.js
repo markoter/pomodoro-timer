@@ -6,16 +6,24 @@ function App() {
   const [sessionLen, changeSessionLen] = useState(25)
 
   const sessionInc = () => {
-    changeSessionLen(sessionLen + 1)
+    if (sessionLen < 60) {
+      changeSessionLen(sessionLen + 1)
+    }
   }
   const sessionDec = () => {
-    changeSessionLen(sessionLen - 1)
+    if (sessionLen > 0) {
+      changeSessionLen(sessionLen - 1)
+    }
   }
   const breakInc = () => {
-    changeBreakLen(breakLen + 1)
+    if (breakLen < 60) {
+      changeBreakLen(breakLen + 1)
+    }
   }
   const breakDec = () => {
-    changeBreakLen(breakLen - 1)
+    if (breakLen > 0) {
+      changeBreakLen(breakLen - 1)
+    }
   }
   const reset = () => {
     changeBreakLen(5)
