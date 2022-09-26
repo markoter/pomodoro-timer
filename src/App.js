@@ -20,6 +20,14 @@ function App() {
         <button id="session-decrement">Session Dec</button>
         <button id="session-increment">Session Inc</button>
       </div>
+      <div id="timer-label">
+        Session
+        <time id="time-left">25:00</time>
+        <div id="controls">
+          <button id="start_stop">start/stop</button>
+          <button id="reset">reset</button>
+        </div>
+        </div>
 
     </div>
   );
