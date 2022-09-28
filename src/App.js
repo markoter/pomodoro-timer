@@ -1,39 +1,29 @@
 import { useEffect, useState } from "react";
 
 function App() {
-
-
   //state
   const [breakLen, changeBreakLen] = useState(300)
   const [sessionLen, changeSessionLen] = useState(1500)
-  const [counting, countingOnOff] = useState(false)
-
-
-
-  useEffect(() => {
-
-    const counter = setInterval(() => {
-      if (counting) {
-        changeSessionLen(sessionLen - 1)
-      }
-    }, 1000)
-    return () => clearInterval(counter)
-  }, [sessionLen, counting])
+  const [timeCount, changeTimeCount] = useState(1500)
+  const [countSwitch, countSwitchOnOff] = useState(false)
+  const [sessionSwitch, changeSessionOnOff] = useState(true)
 
   //buttons onClicks
   const countDown = () => {
     console.log("countDown clicked")
-    countingOnOff(!counting)
+    countSwitchOnOff(!countSwitch)
   }
-  
+
   const sessionInc = () => {
-    if (sessionLen < 3600) {
+    if (sessionLen < 3600 && timeCount < 3600) {
       changeSessionLen(sessionLen + 60)
+      changeTimeCount(timeCount + 60)
     }
   }
   const sessionDec = () => {
-    if (sessionLen > 0) {
+    if (sessionLen > 0 && timeCount > 0) {
       changeSessionLen(sessionLen - 60)
+      changeTimeCount(timeCount - 60)
     }
   }
   const breakInc = () => {
@@ -47,12 +37,10 @@ function App() {
     }
   }
   const reset = () => {
-    // clearInterval(counter)
-
-    countingOnOff(false)
+    countSwitchOnOff(false)
     changeBreakLen(300)
     changeSessionLen(1500)
-
+    changeTimeCount(1500)
   }
 
   //formating as time
@@ -67,12 +55,32 @@ function App() {
     const showSeconds = seconds.toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false })
     return showMinutes + ':' + showSeconds
   }
+
+  useEffect(() => {
+    const counter = setInterval(() => {
+
+      if (countSwitch) {
+        if (timeCount <= 0) {
+          changeSessionOnOff(!changeSessionOnOff)
+          if (sessionSwitch) {
+            changeTimeCount(sessionLen)
+          }
+          else {
+            changeTimeCount(breakLen)
+          }
+        }
+        changeTimeCount(timeCount - 1)
+      }
+    }, 100)
+    return () => clearInterval(counter)
+  }, [timeCount, countSwitch, sessionSwitch])
+
   return (
     <div id="app">
       This is app
       <div id="timer-label">
         Session
-        <time id="time-left">{showTime(sessionLen)}</time>
+        <time id="time-left">{showTime(timeCount)}</time>
         <div id="controls">
           <button id="start_stop" onClick={countDown}>start/stop</button>
           <button id="reset" onClick={reset}>reset</button>
@@ -99,7 +107,9 @@ function App() {
       <div id="debug">
         <p>breakLen is: {breakLen}</p>
         <p>sessionLen is: {sessionLen}</p>
-        <p>counting is: {counting.toString()}</p>
+        <p>timeCount is: {timeCount}</p>
+        <p>countSwitch is: {countSwitch.toString()}</p>
+        <p>sessionSwitch is: {sessionSwitch.toString()}</p>
       </div>
 
     </div>
