@@ -6,15 +6,19 @@ function App() {
   //state
   const [breakLen, changeBreakLen] = useState(300)
   const [sessionLen, changeSessionLen] = useState(1500)
+  const [counting, countingOnOff] = useState(false)
 
-  // const counter = setInterval(() => {
-  //   changeSessionLen(sessionLen -1)
-  // }, 1000)
+  const counter = setInterval(() => {
+    if (counting) {
+      console.log(sessionLen)
+      changeSessionLen(sessionLen - 1)
+    }
+  }, 1000)
 
   //buttons onClicks
   const countDown = () => {
     console.log("countDown clicked")
-    // counter()
+    countingOnOff(!counting)
   }
   const sessionInc = () => {
     if (sessionLen < 3600) {
@@ -37,8 +41,12 @@ function App() {
     }
   }
   const reset = () => {
-    changeBreakLen(5)
-    changeSessionLen(25)
+    clearInterval(counter)
+
+    countingOnOff(false)
+    changeBreakLen(300)
+    changeSessionLen(1500)
+
   }
 
   //formating as time
@@ -51,19 +59,19 @@ function App() {
     const seconds = time - minutes * 60
     const showMinutes = minutes.toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false })
     const showSeconds = seconds.toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false })
-    return minutes + ':' + showSeconds
+    return showMinutes + ':' + showSeconds
   }
   return (
     <div id="app">
       This is app
       <div id="timer-label">
-        Session
-        <time id="time-left">{showTime(sessionLen)}</time>
-        <div id="controls">
-          <button id="start_stop" onClick={countDown}>start/stop</button>
-          <button id="reset" onClick={reset}>reset</button>
+            Session
+            <time id="time-left">{showTime(sessionLen)}</time>
+            <div id="controls">
+                <button id="start_stop" onClick={countDown}>start/stop</button>
+                <button id="reset" onClick={reset}>reset</button>
+            </div>
         </div>
-      </div>
       <div id="inc-dec">
         <div id="session-label" className="labels">
           Session Length
@@ -82,7 +90,11 @@ function App() {
           </div>
         </div>
       </div>
-
+      <div id="debug">
+        <p>breakLen is: {breakLen}</p>
+        <p>sessionLen is: {sessionLen}</p>
+        <p>counting is: {counting.toString()}</p>
+      </div>
 
     </div>
   );
