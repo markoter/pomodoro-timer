@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
 
@@ -8,18 +8,24 @@ function App() {
   const [sessionLen, changeSessionLen] = useState(1500)
   const [counting, countingOnOff] = useState(false)
 
-  const counter = setInterval(() => {
-    if (counting) {
-      console.log(sessionLen)
-      changeSessionLen(sessionLen - 1)
-    }
-  }, 1000)
+
+
+  useEffect(() => {
+
+    const counter = setInterval(() => {
+      if (counting) {
+        changeSessionLen(sessionLen - 1)
+      }
+    }, 1000)
+    return () => clearInterval(counter)
+  }, [sessionLen, counting])
 
   //buttons onClicks
   const countDown = () => {
     console.log("countDown clicked")
     countingOnOff(!counting)
   }
+  
   const sessionInc = () => {
     if (sessionLen < 3600) {
       changeSessionLen(sessionLen + 60)
@@ -41,7 +47,7 @@ function App() {
     }
   }
   const reset = () => {
-    clearInterval(counter)
+    // clearInterval(counter)
 
     countingOnOff(false)
     changeBreakLen(300)
@@ -65,13 +71,13 @@ function App() {
     <div id="app">
       This is app
       <div id="timer-label">
-            Session
-            <time id="time-left">{showTime(sessionLen)}</time>
-            <div id="controls">
-                <button id="start_stop" onClick={countDown}>start/stop</button>
-                <button id="reset" onClick={reset}>reset</button>
-            </div>
+        Session
+        <time id="time-left">{showTime(sessionLen)}</time>
+        <div id="controls">
+          <button id="start_stop" onClick={countDown}>start/stop</button>
+          <button id="reset" onClick={reset}>reset</button>
         </div>
+      </div>
       <div id="inc-dec">
         <div id="session-label" className="labels">
           Session Length
