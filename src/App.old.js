@@ -8,29 +8,6 @@ function App() {
   const [countSwitch, countSwitchOnOff] = useState(false)
   const [sessionSwitch, changeSessionOnOff] = useState(true)
 
-  const initLens = [
-    {
-      name: "session",
-      time: 1500
-    },
-    {
-      name: "break",
-      time: 300
-    }
-  ]
-
-  const reducer = (state, action) {
-    switch(action.type) {
-      case 'increment':
-        return state.time + 60
-      case 'decrement':
-        return state.time -60
-      default:
-        return state
-    }
-  }
-
-
   //buttons onClicks
   const countDown = () => {
     console.log("countDown clicked")
