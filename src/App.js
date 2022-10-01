@@ -1,37 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
-
-
-const initLens = [
-  {
-    name: "session",
-    time: 1500
-  },
-  {
-    name: "break",
-    time: 300
-  }
-]
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'increment':
-      if (timeSet.name === action.name) {
-        return state.time + 60
-      }
-      else {
-        return timeSet
-      }
-    case 'decrement':
-      if (timeSet.name === action.name) {
-        return state.time - 60
-      }
-      else {
-        return timeSet
-      }
-    default:
-      return state
-  }
-}
+import { useEffect, useState } from "react";
 
 function App() {
   //state
@@ -41,23 +8,34 @@ function App() {
   const [countSwitch, countSwitchOnOff] = useState(false)
   const [sessionSwitch, changeSessionOnOff] = useState(true)
 
-
-  const [timeSets, dispatch] = useReducer(reducer, initLens)
-
-
   //buttons onClicks
   const countDown = () => {
     console.log("countDown clicked")
     countSwitchOnOff(!countSwitch)
   }
 
-  const handleIncrease = (timeSet) => {
-    dispatch: ({ type: 'increment', name: timeSet.name })
+  const sessionInc = () => {
+    if (sessionLen < 3600 && timeCount < 3600) {
+      changeSessionLen(sessionLen + 60)
+      changeTimeCount(timeCount + 60)
+    }
   }
-  const handleDecrease = (timeSet) => {
-    dispatch: ({ type: 'decrement', name: timeSet.name })
+  const sessionDec = () => {
+    if (sessionLen > 0 && timeCount > 0) {
+      changeSessionLen(sessionLen - 60)
+      changeTimeCount(timeCount - 60)
+    }
   }
-  
+  const breakInc = () => {
+    if (breakLen < 3600) {
+      changeBreakLen(breakLen + 60)
+    }
+  }
+  const breakDec = () => {
+    if (breakLen > 0) {
+      changeBreakLen(breakLen - 60)
+    }
+  }
   const reset = () => {
     countSwitchOnOff(false)
     changeBreakLen(300)
@@ -113,16 +91,16 @@ function App() {
           Session Length
           <p id="session-length">{returnMinutes(sessionLen)}</p>
           <div id="session-controls" className="controls">
-            <button id="session-decrement" onClick={handleIncrease('session')}>Session Dec</button>
-            <button id="session-increment" onClick={handleDecrease('session')}>Session Inc</button>
+            <button id="session-decrement" onClick={sessionDec}>Session Dec</button>
+            <button id="session-increment" onClick={sessionInc}>Session Inc</button>
           </div>
         </div>
         <div id="break-label" className="labels">
           Break Length
           <p id="break-length">{returnMinutes(breakLen)}</p>
           <div id="break-controls" className="controls">
-            <button id="break-decrement" onClick={handleIncrease('break')}>Break Dec</button>
-            <button id="break-increment" onClick={handleDecrease('break')}>Break INc</button>
+            <button id="break-decrement" onClick={breakDec}>Break Dec</button>
+            <button id="break-increment" onClick={breakInc}>Break INc</button>
           </div>
         </div>
       </div>
