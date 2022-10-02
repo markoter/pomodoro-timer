@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import LabelsContainer from "./labelsContainer";
 
 function App() {
   //state
@@ -86,24 +87,7 @@ function App() {
           <button id="reset" onClick={reset}>reset</button>
         </div>
       </div>
-      <div id="inc-dec">
-        <div id="session-label" className="labels">
-          Session Length
-          <p id="session-length">{returnMinutes(sessionLen)}</p>
-          <div id="session-controls" className="controls">
-            <button id="session-decrement" onClick={sessionDec}>Session Dec</button>
-            <button id="session-increment" onClick={sessionInc}>Session Inc</button>
-          </div>
-        </div>
-        <div id="break-label" className="labels">
-          Break Length
-          <p id="break-length">{returnMinutes(breakLen)}</p>
-          <div id="break-controls" className="controls">
-            <button id="break-decrement" onClick={breakDec}>Break Dec</button>
-            <button id="break-increment" onClick={breakInc}>Break INc</button>
-          </div>
-        </div>
-      </div>
+      <LabelsContainer />
       <div id="debug">
         <p>breakLen is: {breakLen}</p>
         <p>sessionLen is: {sessionLen}</p>

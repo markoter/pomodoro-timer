@@ -21,7 +21,7 @@ const reducer = (state, action) => {
 }
 
 
-const LabelsPart = () => {
+const LabelsContainer = () => {
     const [state, dispatch] = useReducer(reducer, initalState)
     const handlePlusMinus = (actionType, actionProperty) => {
 
@@ -44,4 +44,4 @@ const LabelsPart = () => {
     )
 }
 
-export default LabelsPart
+export default LabelsContainer

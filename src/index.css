@@ -24,10 +24,10 @@ body {
   align-items: center;
 }
 
-#inc-dec {
+#labels-part {
   display: flex;
 }
-#inc-dec .labels {
+#labels-part .labels {
   display: flex;
   flex-direction: column;
 }
