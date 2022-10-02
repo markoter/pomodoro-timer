@@ -2,7 +2,13 @@ import { useEffect, useState, useReducer } from "react";
 import LabelsContainer from "./labelsContainer";
 import TimerComp from "./timerComp";
 //reducer part
-const initalState = { Session: 1500, Break: 300, Timer: 1500 }
+const initalState = { 
+  Session: 1500, 
+  Break: 300, 
+  Timer: 1500, 
+  TimerSwitch: false,
+  SessionSwitch: true 
+ }
 
 const reducer = (state, action) => {
   let tempState = { ...state }
@@ -16,6 +22,9 @@ const reducer = (state, action) => {
     case 'decrement':
       tempState[action.property] = state[action.property] - minute
       return tempState[action.property] < minCount ? state : tempState
+    case 'switch':
+      tempState[action.property] = !state[action.property]
+      return tempState
     case 'reset':
       return initalState
   }
@@ -37,7 +46,7 @@ function App() {
   //buttons onClicks
   const countDown = () => {
     console.log("countDown clicked")
-    countSwitchOnOff(!countSwitch)
+    dispatch({type: 'switch', property: 'TimerSwitch'})
   }
 
   const reset = () => {
@@ -62,7 +71,8 @@ function App() {
   useEffect(() => {
     const counter = setInterval(() => {
 
-      if (countSwitch) {
+      if (state.TimerSwitch) {
+        console.log('timer should run')
         if (state.Timer <= 0) {
           changeSessionOnOff(!changeSessionOnOff)
           // if (sessionSwitch) {
@@ -76,9 +86,9 @@ function App() {
       }
     }, 100)
     return () => clearInterval(counter)
-  }, [timeCount, countSwitch, sessionSwitch])
+  }, [])
 
-  return (
+  return ( 
     <div id="app">
       This is app
       <TimerComp
@@ -97,7 +107,9 @@ function App() {
         <p>timeCount is: {timeCount}</p>
         <p>Timer is: {state.Timer}</p>
         <p>countSwitch is: {countSwitch.toString()}</p>
+        <p>timerSwitch is: {state.TimerSwitch.toString()}</p>
         <p>sessionSwitch is: {sessionSwitch.toString()}</p>
+        <p>redsessionSwitch is: {state.SessionSwitch.toString()}</p>
       </div>
 
     </div>

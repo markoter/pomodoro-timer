@@ -9,16 +9,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  * {
+    border: 1px solid black;
+  
+  }
 }
-* {
-  border: 1px solid black;
 
-}
 
 #app {
   background-color: greenyellow;
   text-align: center;
-
+  
 }
 #timer-label {
   display: flex;
@@ -34,4 +35,10 @@ body {
 }
 button {
   margin: 1rem;
+}
+#debug {
+  padding: 0;
+  p {
+    margin: 0;
+  }
 }

@@ -8,8 +8,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-
-* {
+body * {
   border: 1px solid black;
 }
 
@@ -34,4 +33,11 @@ body {
 
 button {
   margin: 1rem;
+}
+
+#debug {
+  padding: 0;
+}
+#debug p {
+  margin: 0;
 }/*# sourceMappingURL=index.css.map */
