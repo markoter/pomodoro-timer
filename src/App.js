@@ -9,7 +9,6 @@ const initalState = {
   TimerSwitch: false,
   SessionSwitch: true 
  }
-
 const reducer = (state, action) => {
   let tempState = { ...state }
   const minute = 60
@@ -30,10 +29,10 @@ const reducer = (state, action) => {
   }
 
 }
+
 function App() {
   //state
   const [timeCount, changeTimeCount] = useState(1500)
-  const [countSwitch, countSwitchOnOff] = useState(false)
   const [sessionSwitch, changeSessionOnOff] = useState(true)
 
   //usereducer part
@@ -48,9 +47,7 @@ function App() {
     console.log("countDown clicked")
     dispatch({type: 'switch', property: 'TimerSwitch'})
   }
-
   const reset = () => {
-    countSwitchOnOff(false)
     changeTimeCount(1500)
     dispatch({ type: 'reset' })
   }
@@ -59,7 +56,6 @@ function App() {
   const returnMinutes = (time) => {
     return Math.floor(time / 60)
   }
-
   const showTime = (time) => {
     const minutes = returnMinutes(time)
     const seconds = time - minutes * 60
@@ -86,7 +82,7 @@ function App() {
       }
     }, 100)
     return () => clearInterval(counter)
-  }, [])
+  }, [state])
 
   return ( 
     <div id="app">
@@ -106,7 +102,6 @@ function App() {
         <p>Session time is: {state.Session}</p>
         <p>timeCount is: {timeCount}</p>
         <p>Timer is: {state.Timer}</p>
-        <p>countSwitch is: {countSwitch.toString()}</p>
         <p>timerSwitch is: {state.TimerSwitch.toString()}</p>
         <p>sessionSwitch is: {sessionSwitch.toString()}</p>
         <p>redsessionSwitch is: {state.SessionSwitch.toString()}</p>
