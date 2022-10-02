@@ -23,8 +23,6 @@ const reducer = (state, action) => {
 }
 function App() {
   //state
-  const [breakLen, changeBreakLen] = useState(300)
-  const [sessionLen, changeSessionLen] = useState(1500)
   const [timeCount, changeTimeCount] = useState(1500)
   const [countSwitch, countSwitchOnOff] = useState(false)
   const [sessionSwitch, changeSessionOnOff] = useState(true)
@@ -42,28 +40,6 @@ function App() {
     countSwitchOnOff(!countSwitch)
   }
 
-  const sessionInc = () => {
-    if (sessionLen < 3600 && timeCount < 3600) {
-      changeSessionLen(sessionLen + 60)
-      changeTimeCount(timeCount + 60)
-    }
-  }
-  const sessionDec = () => {
-    if (sessionLen > 0 && timeCount > 0) {
-      changeSessionLen(sessionLen - 60)
-      changeTimeCount(timeCount - 60)
-    }
-  }
-  const breakInc = () => {
-    if (breakLen < 3600) {
-      changeBreakLen(breakLen + 60)
-    }
-  }
-  const breakDec = () => {
-    if (breakLen > 0) {
-      changeBreakLen(breakLen - 60)
-    }
-  }
   const reset = () => {
     countSwitchOnOff(false)
     changeTimeCount(1500)
