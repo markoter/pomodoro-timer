@@ -1,7 +1,8 @@
 import { useEffect, useState, useReducer } from "react";
 import LabelsContainer from "./labelsContainer";
+import TimerComp from "./timerComp";
 //reducer part
-const initalState = { Session: 1500, Break: 300, Timer: 1500}
+const initalState = { Session: 1500, Break: 300, Timer: 1500 }
 
 const reducer = (state, action) => {
   let tempState = { ...state }
@@ -66,7 +67,7 @@ function App() {
   const reset = () => {
     countSwitchOnOff(false)
     changeTimeCount(1500)
-    dispatch({type: 'reset'})
+    dispatch({ type: 'reset' })
   }
 
   //formating as time
@@ -95,7 +96,7 @@ function App() {
           //   changeTimeCount(breakLen)
           // }
         }
-        dispatch({type: 'decrement', property: 'Timer'})
+        dispatch({ type: 'decrement', property: 'Timer' })
       }
     }, 100)
     return () => clearInterval(counter)
@@ -104,15 +105,13 @@ function App() {
   return (
     <div id="app">
       This is app
-      <div id="timer-label">
-        Session
-        <time id="time-left">{showTime(timeCount)}</time>
-        <div id="controls">
-          <button id="start_stop" onClick={countDown}>start/stop</button>
-          <button id="reset" onClick={reset}>reset</button>
-        </div>
-      </div>
+      <TimerComp
+        time={showTime(state.Timer)}
+        countDown={countDown}
+        reset={reset}
+      />
       <LabelsContainer
+        returnMinutes={returnMinutes}
         state={state}
         handlePlusMinus={handlePlusMinus}
       />

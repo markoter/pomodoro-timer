@@ -1,10 +1,10 @@
 const Label = (props) => {
-    const { id, state, handlePlusMinus } = props
+    const { id, state, handlePlusMinus, returnMinutes } = props
 
     return (
         <div id={id + "-label"} className="labels">
             {id} Length
-            <p id={id + "-length"}>{state[id] / 60}</p>
+            <p id={id + "-length"}>{returnMinutes(state[id])}</p>
             <div id={id + "-controls"} className="controls">
                 <button
                     id={id + "-increment"}

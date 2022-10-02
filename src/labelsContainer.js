@@ -5,7 +5,7 @@ import Label from "./label"
 
 
 const LabelsContainer = (props) => {
-    const { state, handlePlusMinus } = props
+    const { state, handlePlusMinus, returnMinutes } = props
 
     return (
         <div id="labels-part">
@@ -13,11 +13,13 @@ const LabelsContainer = (props) => {
                 id={'Session'}
                 state={state}
                 handlePlusMinus={handlePlusMinus}
+                returnMinutes={returnMinutes}
             />
             <Label
                 id={'Break'}
                 state={state}
                 handlePlusMinus={handlePlusMinus}
+                returnMinutes={returnMinutes}
             />
 
         </div>
