@@ -1,6 +1,6 @@
 import { useEffect, useState, useReducer } from "react";
-import LabelsContainer from "./labelsContainer";
-import TimerComp from "./timerComp";
+import Controllers from "./controllersContainer";
+import ClockComp from "./clockComp";
 //reducer part
 const initalState = { 
   session: 1500, 
@@ -95,12 +95,12 @@ function App() {
   return ( 
     <div id="app">
       This is app
-      <TimerComp
+      <ClockComp
         time={showTime(state.timer)}
         countDown={countDown}
         reset={reset}
       />
-      <LabelsContainer
+      <Controllers
         returnMinutes={returnMinutes}
         state={state}
         handlePlusMinus={handlePlusMinus}

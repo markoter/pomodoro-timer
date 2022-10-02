@@ -4,7 +4,7 @@ import Label from "./label"
 
 
 
-const LabelsContainer = (props) => {
+const Controllers = (props) => {
     const { state, handlePlusMinus, returnMinutes } = props
 
     return (
@@ -26,4 +26,4 @@ const LabelsContainer = (props) => {
     )
 }
 
-export default LabelsContainer
+export default Controllers

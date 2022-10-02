@@ -1,4 +1,4 @@
-const TimerComp = (props) => {
+const ClockComp = (props) => {
     const {time, countDown, reset} = props
     return (
         <div id="timer-label">
@@ -11,4 +11,4 @@ const TimerComp = (props) => {
         </div>
     )
 }
-export default TimerComp
+export default ClockComp
