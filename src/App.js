@@ -65,9 +65,8 @@ function App() {
   }
   const reset = () => {
     countSwitchOnOff(false)
-    changeBreakLen(300)
-    changeSessionLen(1500)
     changeTimeCount(1500)
+    dispatch({type: 'reset'})
   }
 
   //formating as time

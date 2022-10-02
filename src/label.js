@@ -1,5 +1,3 @@
-
-
 const Label = (props) => {
     const { id, state, handlePlusMinus } = props
 
