@@ -1,7 +1,7 @@
 import { useEffect, useState, useReducer } from "react";
 import LabelsContainer from "./labelsContainer";
 //reducer part
-const initalState = { Session: 1500, Break: 300 }
+const initalState = { Session: 1500, Break: 300, Timer: 1500}
 
 const reducer = (state, action) => {
   let tempState = { ...state }
@@ -86,16 +86,16 @@ function App() {
     const counter = setInterval(() => {
 
       if (countSwitch) {
-        if (timeCount <= 0) {
+        if (state.Timer <= 0) {
           changeSessionOnOff(!changeSessionOnOff)
-          if (sessionSwitch) {
-            changeTimeCount(sessionLen)
-          }
-          else {
-            changeTimeCount(breakLen)
-          }
+          // if (sessionSwitch) {
+          //   changeTimeCount(sessionLen)
+          // }
+          // else {
+          //   changeTimeCount(breakLen)
+          // }
         }
-        changeTimeCount(timeCount - 1)
+        dispatch({type: 'decrement', property: 'Timer'})
       }
     }, 100)
     return () => clearInterval(counter)
@@ -117,9 +117,10 @@ function App() {
         handlePlusMinus={handlePlusMinus}
       />
       <div id="debug">
-        <p>breakLen is: {breakLen}</p>
-        <p>sessionLen is: {sessionLen}</p>
+        <p>Break time is: {state.Break}</p>
+        <p>Session time is: {state.Session}</p>
         <p>timeCount is: {timeCount}</p>
+        <p>Timer is: {state.Timer}</p>
         <p>countSwitch is: {countSwitch.toString()}</p>
         <p>sessionSwitch is: {sessionSwitch.toString()}</p>
       </div>
