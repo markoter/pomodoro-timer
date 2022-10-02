@@ -1,8 +1,8 @@
 
 
 const Label = (props) => {
-    const {id, state, handlePlusMinus} = props
-    
+    const { id, state, handlePlusMinus } = props
+
     return (
         <div id={id + "-label"} className="labels">
             {id} Length

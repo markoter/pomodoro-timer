@@ -1,6 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import LabelsContainer from "./labelsContainer";
+//reducer part
+const initalState = { Session: 1500, Break: 300 }
 
+const reducer = (state, action) => {
+  let tempState = { ...state }
+  const minute = 60
+  const maxCount = 3600
+  const minCount = 0
+  switch (action.type) {
+    case 'increment':
+      tempState[action.property] = state[action.property] + minute
+      return tempState[action.property] > maxCount ? state : tempState
+    case 'decrement':
+      tempState[action.property] = state[action.property] - minute
+      return tempState[action.property] < minCount ? state : tempState
+    case 'reset':
+      return initalState
+  }
+
+}
 function App() {
   //state
   const [breakLen, changeBreakLen] = useState(300)
@@ -8,6 +27,13 @@ function App() {
   const [timeCount, changeTimeCount] = useState(1500)
   const [countSwitch, countSwitchOnOff] = useState(false)
   const [sessionSwitch, changeSessionOnOff] = useState(true)
+
+  //usereducer part
+  const [state, dispatch] = useReducer(reducer, initalState)
+  const handlePlusMinus = (actionType, actionProperty) => {
+
+    dispatch({ type: actionType, property: actionProperty })
+  }
 
   //buttons onClicks
   const countDown = () => {
@@ -87,7 +113,10 @@ function App() {
           <button id="reset" onClick={reset}>reset</button>
         </div>
       </div>
-      <LabelsContainer />
+      <LabelsContainer
+        state={state}
+        handlePlusMinus={handlePlusMinus}
+      />
       <div id="debug">
         <p>breakLen is: {breakLen}</p>
         <p>sessionLen is: {sessionLen}</p>
