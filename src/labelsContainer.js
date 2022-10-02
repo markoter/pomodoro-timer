@@ -10,13 +10,13 @@ const LabelsContainer = (props) => {
     return (
         <div id="labels-part">
             <Label
-                id={'Session'}
+                id={'session'}
                 state={state}
                 handlePlusMinus={handlePlusMinus}
                 returnMinutes={returnMinutes}
             />
             <Label
-                id={'Break'}
+                id={'break'}
                 state={state}
                 handlePlusMinus={handlePlusMinus}
                 returnMinutes={returnMinutes}

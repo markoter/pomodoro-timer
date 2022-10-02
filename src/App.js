@@ -3,11 +3,11 @@ import LabelsContainer from "./labelsContainer";
 import TimerComp from "./timerComp";
 //reducer part
 const initalState = { 
-  Session: 1500, 
-  Break: 300, 
-  Timer: 1500, 
-  TimerSwitch: false,
-  SessionSwitch: true 
+  session: 1500, 
+  break: 300, 
+  timer: 1500, 
+  countingOn: false,
+  sessionOn: true 
  }
 const reducer = (state, action) => {
   let tempState = { ...state }
@@ -17,12 +17,21 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'increment':
       tempState[action.property] = state[action.property] + minute
+      tempState.timer = state.timer + minute
       return tempState[action.property] > maxCount ? state : tempState
     case 'decrement':
       tempState[action.property] = state[action.property] - minute
+      tempState.timer = state.timer - minute
       return tempState[action.property] < minCount ? state : tempState
-    case 'switch':
-      tempState[action.property] = !state[action.property]
+    case 'countingDown':
+      tempState.timer = state.timer - 1
+      return tempState
+    case 'switch-counting':
+      tempState.countingOn = !state.countingOn
+      return tempState
+    case 'switch-session':
+      tempState.sessionOn = !state.sessionOn
+      tempState.timer = tempState.sessionOn ? state.session : state.break
       return tempState
     case 'reset':
       return initalState
@@ -33,7 +42,6 @@ const reducer = (state, action) => {
 function App() {
   //state
   const [timeCount, changeTimeCount] = useState(1500)
-  const [sessionSwitch, changeSessionOnOff] = useState(true)
 
   //usereducer part
   const [state, dispatch] = useReducer(reducer, initalState)
@@ -45,7 +53,7 @@ function App() {
   //buttons onClicks
   const countDown = () => {
     console.log("countDown clicked")
-    dispatch({type: 'switch', property: 'TimerSwitch'})
+    dispatch({type: 'switch-counting'})
   }
   const reset = () => {
     changeTimeCount(1500)
@@ -67,20 +75,20 @@ function App() {
   useEffect(() => {
     const counter = setInterval(() => {
 
-      if (state.TimerSwitch) {
+      if (state.countingOn) {
         console.log('timer should run')
-        if (state.Timer <= 0) {
-          changeSessionOnOff(!changeSessionOnOff)
-          // if (sessionSwitch) {
+        if (state.timer <= 0) {
+          dispatch({type: "switch-session"})
+          // if (sessionOn) {
           //   changeTimeCount(sessionLen)
           // }
           // else {
           //   changeTimeCount(breakLen)
           // }
         }
-        dispatch({ type: 'decrement', property: 'Timer' })
+        dispatch({ type: 'countingDown'})
       }
-    }, 100)
+    }, 1000)
     return () => clearInterval(counter)
   }, [state])
 
@@ -88,7 +96,7 @@ function App() {
     <div id="app">
       This is app
       <TimerComp
-        time={showTime(state.Timer)}
+        time={showTime(state.timer)}
         countDown={countDown}
         reset={reset}
       />
@@ -98,13 +106,12 @@ function App() {
         handlePlusMinus={handlePlusMinus}
       />
       <div id="debug">
-        <p>Break time is: {state.Break}</p>
-        <p>Session time is: {state.Session}</p>
+        <p>break time is: {state.break}</p>
+        <p>session time is: {state.session}</p>
         <p>timeCount is: {timeCount}</p>
-        <p>Timer is: {state.Timer}</p>
-        <p>timerSwitch is: {state.TimerSwitch.toString()}</p>
-        <p>sessionSwitch is: {sessionSwitch.toString()}</p>
-        <p>redsessionSwitch is: {state.SessionSwitch.toString()}</p>
+        <p>timer is: {state.timer}</p>
+        <p>countingOn is: {state.countingOn.toString()}</p>
+        <p>sessionOn is: {state.sessionOn.toString()}</p>
       </div>
 
     </div>
