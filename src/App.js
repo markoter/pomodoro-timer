@@ -1,6 +1,7 @@
 import { useEffect, useState, useReducer } from "react";
 import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
+
 //reducer part
 const initalState = { 
   session: 1500, 
@@ -17,7 +18,13 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'increment':
       tempState[action.property] = state[action.property] + minute
-      tempState.timer = state.timer + minute
+      if (state.sessionOn && (action.property === 'session')) {
+        tempState.timer = state.timer + minute
+
+      }
+      else if(!state.sessionOn && (action.property === 'break')) {
+        tempState.timer = state.timer + minute
+      }
       return tempState[action.property] > maxCount ? state : tempState
     case 'decrement':
       tempState[action.property] = state[action.property] - minute
@@ -88,7 +95,7 @@ function App() {
         }
         dispatch({ type: 'countingDown'})
       }
-    }, 1000)
+    }, 10)
     return () => clearInterval(counter)
   }, [state])
 
