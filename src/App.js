@@ -1,75 +1,76 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
+import Controllers from "./controllersContainer";
+import ClockComp from "./clockComp";
 
-
-const initLens = [
-  {
-    name: "session",
-    time: 1500
-  },
-  {
-    name: "break",
-    time: 300
-  }
-]
-
+//reducer part
+const initalState = { 
+  session: 1500, 
+  break: 300, 
+  timer: 1500, 
+  countingOn: false,
+  sessionOn: true 
+ }
 const reducer = (state, action) => {
+  let tempState = { ...state }
+  const minute = 60
+  const maxCount = 3600
+  const minCount = 0
   switch (action.type) {
     case 'increment':
-      if (timeSet.name === action.name) {
-        return state.time + 60
+      tempState[action.property] = state[action.property] + minute
+      if (state.sessionOn && (action.property === 'session')) {
+        tempState.timer = state.timer + minute
+
       }
-      else {
-        return timeSet
+      else if(!state.sessionOn && (action.property === 'break')) {
+        tempState.timer = state.timer + minute
       }
+      return tempState[action.property] > maxCount ? state : tempState
     case 'decrement':
-      if (timeSet.name === action.name) {
-        return state.time - 60
-      }
-      else {
-        return timeSet
-      }
-    default:
-      return state
+      tempState[action.property] = state[action.property] - minute
+      tempState.timer = state.timer - minute
+      return tempState[action.property] < minCount ? state : tempState
+    case 'countingDown':
+      tempState.timer = state.timer - 1
+      return tempState
+    case 'switch-counting':
+      tempState.countingOn = !state.countingOn
+      return tempState
+    case 'switch-session':
+      tempState.sessionOn = !state.sessionOn
+      tempState.timer = tempState.sessionOn ? state.session : state.break
+      return tempState
+    case 'reset':
+      return initalState
   }
+
 }
 
 function App() {
   //state
-  const [breakLen, changeBreakLen] = useState(300)
-  const [sessionLen, changeSessionLen] = useState(1500)
   const [timeCount, changeTimeCount] = useState(1500)
-  const [countSwitch, countSwitchOnOff] = useState(false)
-  const [sessionSwitch, changeSessionOnOff] = useState(true)
 
+  //usereducer part
+  const [state, dispatch] = useReducer(reducer, initalState)
+  const handlePlusMinus = (actionType, actionProperty) => {
 
-  const [timeSets, dispatch] = useReducer(reducer, initLens)
-
+    dispatch({ type: actionType, property: actionProperty })
+  }
 
   //buttons onClicks
   const countDown = () => {
     console.log("countDown clicked")
-    countSwitchOnOff(!countSwitch)
+    dispatch({type: 'switch-counting'})
   }
-
-  const handleIncrease = (timeSet) => {
-    dispatch: ({ type: 'increment', name: timeSet.name })
-  }
-  const handleDecrease = (timeSet) => {
-    dispatch: ({ type: 'decrement', name: timeSet.name })
-  }
-  
   const reset = () => {
-    countSwitchOnOff(false)
-    changeBreakLen(300)
-    changeSessionLen(1500)
     changeTimeCount(1500)
+    dispatch({ type: 'reset' })
   }
 
   //formating as time
   const returnMinutes = (time) => {
     return Math.floor(time / 60)
   }
-
   const showTime = (time) => {
     const minutes = returnMinutes(time)
     const seconds = time - minutes * 60
@@ -81,57 +82,43 @@ function App() {
   useEffect(() => {
     const counter = setInterval(() => {
 
-      if (countSwitch) {
-        if (timeCount <= 0) {
-          changeSessionOnOff(!changeSessionOnOff)
-          if (sessionSwitch) {
-            changeTimeCount(sessionLen)
-          }
-          else {
-            changeTimeCount(breakLen)
-          }
+      if (state.countingOn) {
+        console.log('timer should run')
+        if (state.timer <= 0) {
+          dispatch({type: "switch-session"})
+          // if (sessionOn) {
+          //   changeTimeCount(sessionLen)
+          // }
+          // else {
+          //   changeTimeCount(breakLen)
+          // }
         }
-        changeTimeCount(timeCount - 1)
+        dispatch({ type: 'countingDown'})
       }
-    }, 100)
+    }, 10)
     return () => clearInterval(counter)
-  }, [timeCount, countSwitch, sessionSwitch])
+  }, [state])
 
-  return (
+  return ( 
     <div id="app">
       This is app
-      <div id="timer-label">
-        Session
-        <time id="time-left">{showTime(timeCount)}</time>
-        <div id="controls">
-          <button id="start_stop" onClick={countDown}>start/stop</button>
-          <button id="reset" onClick={reset}>reset</button>
-        </div>
-      </div>
-      <div id="inc-dec">
-        <div id="session-label" className="labels">
-          Session Length
-          <p id="session-length">{returnMinutes(sessionLen)}</p>
-          <div id="session-controls" className="controls">
-            <button id="session-decrement" onClick={handleIncrease('session')}>Session Dec</button>
-            <button id="session-increment" onClick={handleDecrease('session')}>Session Inc</button>
-          </div>
-        </div>
-        <div id="break-label" className="labels">
-          Break Length
-          <p id="break-length">{returnMinutes(breakLen)}</p>
-          <div id="break-controls" className="controls">
-            <button id="break-decrement" onClick={handleIncrease('break')}>Break Dec</button>
-            <button id="break-increment" onClick={handleDecrease('break')}>Break INc</button>
-          </div>
-        </div>
-      </div>
+      <ClockComp
+        time={showTime(state.timer)}
+        countDown={countDown}
+        reset={reset}
+      />
+      <Controllers
+        returnMinutes={returnMinutes}
+        state={state}
+        handlePlusMinus={handlePlusMinus}
+      />
       <div id="debug">
-        <p>breakLen is: {breakLen}</p>
-        <p>sessionLen is: {sessionLen}</p>
+        <p>break time is: {state.break}</p>
+        <p>session time is: {state.session}</p>
         <p>timeCount is: {timeCount}</p>
-        <p>countSwitch is: {countSwitch.toString()}</p>
-        <p>sessionSwitch is: {sessionSwitch.toString()}</p>
+        <p>timer is: {state.timer}</p>
+        <p>countingOn is: {state.countingOn.toString()}</p>
+        <p>sessionOn is: {state.sessionOn.toString()}</p>
       </div>
 
     </div>

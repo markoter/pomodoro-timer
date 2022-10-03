@@ -9,23 +9,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  * {
+    border: 1px solid black;
+  }
 }
-* {
-  border: 1px solid black;
 
-}
 
 #app {
   background-color: greenyellow;
   text-align: center;
-
+  
 }
 #timer-label {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#inc-dec {
+#labels-part{
   display: flex;
   .labels {
     display: flex;
@@ -34,4 +34,10 @@ body {
 }
 button {
   margin: 1rem;
+}
+#debug {
+  padding: 0;
+  p {
+    margin: 0;
+  }
 }
