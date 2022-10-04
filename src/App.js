@@ -1,14 +1,14 @@
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
 
 //reducer part
 const initalState = {
+  countingOn: false,
+  sessionOn: true,
   session: 1500,
   break: 300,
-  timer: 1500,
-  countingOn: false,
-  sessionOn: true
+  timer: 1500
 }
 const reducer = (state, action) => {
   let tempState = { ...state }
@@ -18,6 +18,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'increment':
       tempState[action.property] = state[action.property] + minute
+
+      //change timer only if correct session/break is on
       if (state.sessionOn && (action.property === 'session')) {
         tempState.timer = state.timer + minute
 
@@ -25,11 +27,21 @@ const reducer = (state, action) => {
       else if (!state.sessionOn && (action.property === 'break')) {
         tempState.timer = state.timer + minute
       }
+
       return tempState[action.property] > maxCount ? state : tempState
     case 'decrement':
       tempState[action.property] = state[action.property] - minute
-      tempState.timer = state.timer - minute
-      return tempState[action.property] < minCount ? state : tempState
+      
+      //change timer only if correct session/break is on
+      if (state.sessionOn && (action.property === 'session')) {
+        tempState.timer = state.timer - minute
+
+      }
+      else if (!state.sessionOn && (action.property === 'break')) {
+        tempState.timer = state.timer - minute
+      }
+
+      return tempState[action.property] <= minCount ? state : tempState
     case 'countingDown':
       tempState.timer = state.timer - 1
       return tempState
@@ -58,7 +70,6 @@ function App() {
 
   //buttons onClicks
   const countDown = () => {
-    console.log("countDown clicked")
     dispatch({ type: 'switch-counting' })
   }
   const reset = () => {
@@ -81,12 +92,13 @@ function App() {
     const counter = setInterval(() => {
 
       if (state.countingOn) {
-        if (state.timer <= 0) {
-          // dispatch({ type: "switch-session" })
-        }
         dispatch({ type: 'countingDown' })
+        if (state.timer <= 0) {
+          dispatch({ type: "switch-session" })
+          // reset()
+        }
       }
-    }, 1000)
+    }, 10)
     return () => clearInterval(counter)
   }, [state])
 
