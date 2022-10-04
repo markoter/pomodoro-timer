@@ -35,9 +35,14 @@ body {
 button {
   margin: 1rem;
 }
-#debug {
+#debugDisplay {
+  
   padding: 0;
   p {
     margin: 0;
   }
+}
+
+.hidden {
+  display: none;
 }

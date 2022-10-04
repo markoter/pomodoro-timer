@@ -1,6 +1,16 @@
 import { useEffect, useReducer } from "react";
 import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
+import DebugDisplay from "./debugDisplay";
+
+let isDevMode = true
+const showDebugTools = (isDevMode) =>{
+  const debugDisplay = document.getElementById('debugDisplay')
+  if (isDevMode) {
+    debugDisplay.classList.remove('hidden')
+  }
+}
+showDebugTools(isDevMode)
 
 //reducer part
 const initalState = {
@@ -110,14 +120,7 @@ function App() {
         state={state}
         handlePlusMinus={handlePlusMinus}
       />
-      <div id="debug">
-        <p>break time is: {state.break}</p>
-        <p>session time is: {state.session}</p>
-        <p>timer is: {state.timer}</p>
-        <p>countingOn is: {state.countingOn.toString()}</p>
-        <p>sessionOn is: {state.sessionOn.toString()}</p>
-      </div>
-
+      <DebugDisplay state={state} />
     </div>
   );
 }

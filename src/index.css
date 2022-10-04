@@ -35,9 +35,13 @@ button {
   margin: 1rem;
 }
 
-#debug {
+#debugDisplay {
   padding: 0;
 }
-#debug p {
+#debugDisplay p {
   margin: 0;
+}
+
+.hidden {
+  display: none;
 }/*# sourceMappingURL=index.css.map */
