@@ -15,16 +15,14 @@ const reducer = (state, action) => {
   const minute = 60
   const maxCount = 3600
   const minCount = 0
+  const isSession = state.sessionOn && (action.property === 'session')
+  const isBreak = !state.sessionOn && (action.property === 'break')
   switch (action.type) {
     case 'increment':
       tempState[action.property] = state[action.property] + minute
 
       //change timer only if correct session/break is on
-      if (state.sessionOn && (action.property === 'session')) {
-        tempState.timer = state.timer + minute
-
-      }
-      else if (!state.sessionOn && (action.property === 'break')) {
+      if (isSession  || isBreak) {
         tempState.timer = state.timer + minute
       }
 
@@ -33,11 +31,7 @@ const reducer = (state, action) => {
       tempState[action.property] = state[action.property] - minute
       
       //change timer only if correct session/break is on
-      if (state.sessionOn && (action.property === 'session')) {
-        tempState.timer = state.timer - minute
-
-      }
-      else if (!state.sessionOn && (action.property === 'break')) {
+      if (isSession  || isBreak) {
         tempState.timer = state.timer - minute
       }
 
