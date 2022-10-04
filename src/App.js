@@ -107,6 +107,7 @@ function App() {
       This is app
       <ClockComp
         time={showTime(state.timer)}
+        sessionOn={state.sessionOn}
         countDown={countDown}
         reset={reset}
       />
