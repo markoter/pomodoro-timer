@@ -1,8 +1,4 @@
-import { useReducer } from "react"
 import Label from "./label"
-
-
-
 
 const Controllers = (props) => {
     const { state, handlePlusMinus, returnMinutes } = props

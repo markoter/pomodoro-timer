@@ -3,13 +3,13 @@ import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
 
 //reducer part
-const initalState = { 
-  session: 1500, 
-  break: 300, 
-  timer: 1500, 
+const initalState = {
+  session: 1500,
+  break: 300,
+  timer: 1500,
   countingOn: false,
-  sessionOn: true 
- }
+  sessionOn: true
+}
 const reducer = (state, action) => {
   let tempState = { ...state }
   const minute = 60
@@ -22,7 +22,7 @@ const reducer = (state, action) => {
         tempState.timer = state.timer + minute
 
       }
-      else if(!state.sessionOn && (action.property === 'break')) {
+      else if (!state.sessionOn && (action.property === 'break')) {
         tempState.timer = state.timer + minute
       }
       return tempState[action.property] > maxCount ? state : tempState
@@ -42,14 +42,13 @@ const reducer = (state, action) => {
       return tempState
     case 'reset':
       return initalState
+    default:
+      return state
   }
 
 }
 
 function App() {
-  //state
-  const [timeCount, changeTimeCount] = useState(1500)
-
   //usereducer part
   const [state, dispatch] = useReducer(reducer, initalState)
   const handlePlusMinus = (actionType, actionProperty) => {
@@ -60,10 +59,9 @@ function App() {
   //buttons onClicks
   const countDown = () => {
     console.log("countDown clicked")
-    dispatch({type: 'switch-counting'})
+    dispatch({ type: 'switch-counting' })
   }
   const reset = () => {
-    changeTimeCount(1500)
     dispatch({ type: 'reset' })
   }
 
@@ -83,23 +81,16 @@ function App() {
     const counter = setInterval(() => {
 
       if (state.countingOn) {
-        console.log('timer should run')
         if (state.timer <= 0) {
-          dispatch({type: "switch-session"})
-          // if (sessionOn) {
-          //   changeTimeCount(sessionLen)
-          // }
-          // else {
-          //   changeTimeCount(breakLen)
-          // }
+          // dispatch({ type: "switch-session" })
         }
-        dispatch({ type: 'countingDown'})
+        dispatch({ type: 'countingDown' })
       }
-    }, 10)
+    }, 1000)
     return () => clearInterval(counter)
   }, [state])
 
-  return ( 
+  return (
     <div id="app">
       This is app
       <ClockComp
@@ -115,7 +106,6 @@ function App() {
       <div id="debug">
         <p>break time is: {state.break}</p>
         <p>session time is: {state.session}</p>
-        <p>timeCount is: {timeCount}</p>
         <p>timer is: {state.timer}</p>
         <p>countingOn is: {state.countingOn.toString()}</p>
         <p>sessionOn is: {state.sessionOn.toString()}</p>
