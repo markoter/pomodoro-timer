@@ -3,14 +3,6 @@ import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
 import DebugDisplay from "./debugDisplay";
 
-// let isDevMode = true
-// const showDebugTools = (isDevMode) =>{
-//   const debugDisplay = document.getElementById('debugDisplay')
-//   if (isDevMode) {
-//     debugDisplay.classList.remove('hidden')
-//   }
-// }
-// showDebugTools(isDevMode)
 
 //reducer part
 const initalState = {

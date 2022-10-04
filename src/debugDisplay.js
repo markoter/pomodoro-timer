@@ -1,7 +1,7 @@
 const DebugDisplay = (props) => {
     const { state } = props
     return (
-        <div id="debugDisplay" className="hidden">
+        <div id="debugDisplay">
             <p>break time is: {state.break}</p>
             <p>session time is: {state.session}</p>
             <p>timer is: {state.timer}</p>
