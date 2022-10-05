@@ -2,7 +2,6 @@ import { useEffect, useReducer } from "react";
 import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
 import DebugDisplay from "./debugDisplay";
-// import audio from "./timer-beep.wav"
 
 
 //reducer part
@@ -122,8 +121,9 @@ function App() {
         state={state}
         handlePlusMinus={handlePlusMinus}
       />
-      <DebugDisplay state={state} />
-      <button onClick={playAudio}>Play Debug</button>
+      <DebugDisplay 
+      state={state} 
+      playAudio={playAudio}/>
     </div>
   );
 }
