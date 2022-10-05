@@ -7,7 +7,7 @@ const DebugDisplay = (props) => {
             <p>timer is: {state.timer}</p>
             <p>countingOn is: {state.countingOn.toString()}</p>
             <p>sessionOn is: {state.sessionOn.toString()}</p>
-            <button onClick={playAudio}>Play Debug</button>
+            <button onClick={playAudio}>Audio play Debug</button>
 
         </div>
     )

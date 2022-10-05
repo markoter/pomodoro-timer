@@ -65,11 +65,13 @@ function App() {
   }
 
   //audio
+  let beepSound = document.getElementById('beep')
   const playAudio = () => {
-    const audio = document.getElementById('beep')
-    if (audio) {
-      audio.play()
-    }
+      beepSound.play()
+  }
+  const stopAudio = () => {
+    beepSound.pause()
+    beepSound.currentTime = 0
   }
 
   //buttons onClicks
@@ -78,6 +80,7 @@ function App() {
   }
   const reset = () => {
     dispatch({ type: 'reset' })
+    stopAudio()
   }
 
   //formating as time
@@ -105,7 +108,7 @@ function App() {
       }
     }, 100)
     return () => clearInterval(counter)
-  }, [state])
+  }, [state, playAudio])
 
   return (
     <div id="app">
