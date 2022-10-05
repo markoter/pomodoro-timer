@@ -96,11 +96,12 @@ function App() {
       if (state.countingOn) {
         dispatch({ type: 'countingDown' })
         if (state.timer <= 0) {
+          playAudio()
           dispatch({ type: "switch-session" })
           // reset()
         }
       }
-    }, 1000)
+    }, 100)
     return () => clearInterval(counter)
   }, [state])
 
