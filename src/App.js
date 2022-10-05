@@ -2,6 +2,7 @@ import { useEffect, useReducer } from "react";
 import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
 import DebugDisplay from "./debugDisplay";
+import audio from "./timer-beep.wav"
 
 
 //reducer part
@@ -64,6 +65,11 @@ function App() {
     dispatch({ type: actionType, property: actionProperty })
   }
 
+  //audio
+  const playAudio = () => {
+    new Audio(audio).play()
+  }
+
   //buttons onClicks
   const countDown = () => {
     dispatch({ type: 'switch-counting' })
@@ -113,6 +119,7 @@ function App() {
         handlePlusMinus={handlePlusMinus}
       />
       <DebugDisplay state={state} />
+      <button onClick={playAudio}>Play Debug</button>
     </div>
   );
 }

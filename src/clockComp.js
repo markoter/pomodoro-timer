@@ -9,6 +9,7 @@ const ClockComp = (props) => {
                 <button id="start_stop" onClick={countDown}>start/stop</button>
                 <button id="reset" onClick={reset}>reset</button>
             </div>
+            <audio id="beep" src="%PUBLIC_URL%/timer-beep.wav" />
         </div>
     )
 }
