@@ -2,7 +2,7 @@ import { useEffect, useReducer } from "react";
 import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
 import DebugDisplay from "./debugDisplay";
-import audio from "./timer-beep.wav"
+// import audio from "./timer-beep.wav"
 
 
 //reducer part
@@ -67,7 +67,10 @@ function App() {
 
   //audio
   const playAudio = () => {
-    new Audio(audio).play()
+    const audio = document.getElementById('beep')
+    if (audio) {
+      audio.play()
+    }
   }
 
   //buttons onClicks
