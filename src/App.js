@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
 import DebugDisplay from "./debugDisplay";
@@ -65,13 +65,13 @@ function App() {
   }
 
   //audio
-  let beepSound = document.getElementById('beep')
+  // const beepSound = useRef(null)
   const playAudio = () => {
-      beepSound.play()
+      beepSound.current.play()
   }
   const stopAudio = () => {
-    beepSound.pause()
-    beepSound.currentTime = 0
+    beepSound.current.pause()
+    beepSound.current.currentTime = 0
   }
 
   //buttons onClicks
