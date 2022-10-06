@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
 import DebugDisplay from "./debugDisplay";
@@ -64,12 +64,23 @@ function App() {
     dispatch({ type: actionType, property: actionProperty })
   }
 
+  //audio
+  // const beepSound = useRef(null)
+  const playAudio = () => {
+      beepSound.current.play()
+  }
+  const stopAudio = () => {
+    beepSound.current.pause()
+    beepSound.current.currentTime = 0
+  }
+
   //buttons onClicks
   const countDown = () => {
     dispatch({ type: 'switch-counting' })
   }
   const reset = () => {
     dispatch({ type: 'reset' })
+    stopAudio()
   }
 
   //formating as time
@@ -90,13 +101,14 @@ function App() {
       if (state.countingOn) {
         dispatch({ type: 'countingDown' })
         if (state.timer <= 0) {
+          playAudio()
           dispatch({ type: "switch-session" })
           // reset()
         }
       }
-    }, 1000)
+    }, 100)
     return () => clearInterval(counter)
-  }, [state])
+  }, [state, playAudio])
 
   return (
     <div id="app">
@@ -112,7 +124,9 @@ function App() {
         state={state}
         handlePlusMinus={handlePlusMinus}
       />
-      <DebugDisplay state={state} />
+      <DebugDisplay 
+      state={state} 
+      playAudio={playAudio}/>
     </div>
   );
 }
