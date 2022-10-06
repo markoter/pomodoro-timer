@@ -3,18 +3,18 @@ const Label = (props) => {
 
     return (
         <div id={id + "-label"} className="labels">
-            {id} Length
+            {id} length
             <p id={id + "-length"}>{returnMinutes(state[id])}</p>
             <div id={id + "-controls"} className="controls">
                 <button
                     id={id + "-increment"}
                     onClick={() => handlePlusMinus('increment', id)}>
-                    {id} Inc
+                    {id} +
                 </button>
                 <button
                     id={id + "-decrement"}
                     onClick={() => handlePlusMinus('decrement', id)}>
-                    {id} Dec
+                    {id} -
                 </button>
             </div>
         </div>

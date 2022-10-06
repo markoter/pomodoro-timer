@@ -2,18 +2,20 @@ import audio from "./timer-beep.wav"
 import { forwardRef } from "react"
 
 const ClockComp = (props, ref) => {
-    const {time, sessionOn, countDown, reset} = props
+    const { time, sessionOn, countDown, reset } = props
     const currentCounting = sessionOn ? 'session' : 'break'
 
     return (
         <div id="clock">
+            <div id="pomodoro">
+                <time id="time-left">{time}</time>
+            </div>
             <p id="timer-label">{currentCounting}</p>
-            <time id="time-left">{time}</time>
             <div id="controls">
                 <button id="start_stop" onClick={countDown}>start/stop</button>
                 <button id="reset" onClick={reset}>reset</button>
             </div>
-            <audio id="beep" src={audio} ref={ref}/>
+            <audio id="beep" src={audio} ref={ref} />
         </div>
     )
 }
