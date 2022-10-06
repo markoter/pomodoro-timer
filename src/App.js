@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef } from "react";
+import { createRef, useEffect, useReducer } from "react";
 import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
 import DebugDisplay from "./debugDisplay";
@@ -65,14 +65,16 @@ function App() {
   }
 
   //audio
-  // const beepSound = useRef(null)
+  const ref = createRef()
   const playAudio = () => {
-      beepSound.current.play()
+      ref.current.play()
   }
   const stopAudio = () => {
-    beepSound.current.pause()
-    beepSound.current.currentTime = 0
+    ref.current.pause()
+    ref.current.currentTime = 0
   }
+
+  
 
   //buttons onClicks
   const countDown = () => {
@@ -118,6 +120,7 @@ function App() {
         sessionOn={state.sessionOn}
         countDown={countDown}
         reset={reset}
+        ref={ref}
       />
       <Controllers
         returnMinutes={returnMinutes}
