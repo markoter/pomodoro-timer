@@ -1,4 +1,5 @@
 import audio from "./timer-beep.wav"
+import { forwardRef } from "react"
 
 const ClockComp = (props, ref) => {
     const {time, sessionOn, countDown, reset} = props
@@ -16,4 +17,4 @@ const ClockComp = (props, ref) => {
         </div>
     )
 }
-export default ClockComp
+export default forwardRef(ClockComp)
