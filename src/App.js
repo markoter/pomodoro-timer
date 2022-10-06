@@ -1,8 +1,7 @@
-import { useEffect, useReducer, useRef } from "react";
+import { useEffect, useReducer, useRef, useCallback } from "react";
 import Controllers from "./controllersContainer";
 import ClockComp from "./clockComp";
 import DebugDisplay from "./debugDisplay";
-
 
 //reducer part
 const initalState = {
@@ -24,19 +23,17 @@ const reducer = (state, action) => {
       tempState[action.property] = state[action.property] + minute
 
       //change timer only if correct session/break is on
-      if (isSession  || isBreak) {
+      if (isSession || isBreak) {
         tempState.timer = state.timer + minute
       }
-
       return tempState[action.property] > maxCount ? state : tempState
     case 'decrement':
       tempState[action.property] = state[action.property] - minute
-      
+
       //change timer only if correct session/break is on
-      if (isSession  || isBreak) {
+      if (isSession || isBreak) {
         tempState.timer = state.timer - minute
       }
-
       return tempState[action.property] <= minCount ? state : tempState
     case 'countingDown':
       tempState.timer = state.timer - 1
@@ -53,7 +50,6 @@ const reducer = (state, action) => {
     default:
       return state
   }
-
 }
 
 function App() {
@@ -66,15 +62,19 @@ function App() {
 
   //audio
   const audioRef = useRef(null)
-  const playAudio = () => {
-    audioRef.current.play()
-  }
-  const stopAudio = () => {
-    audioRef.current.pause()
-    audioRef.current.currentTime = 0
-  }
-
-  
+  const playAudio = useCallback(
+    () => {
+      audioRef.current.play()
+    },
+    [audioRef],
+  )
+  const stopAudio = useCallback(
+    () => {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+    },
+    [audioRef],
+  )
 
   //buttons onClicks
   const countDown = () => {
@@ -108,7 +108,7 @@ function App() {
           // reset()
         }
       }
-    }, 100)
+    }, 1000)
     return () => clearInterval(counter)
   }, [state, playAudio])
 
@@ -127,9 +127,9 @@ function App() {
         state={state}
         handlePlusMinus={handlePlusMinus}
       />
-      <DebugDisplay 
-      state={state} 
-      playAudio={playAudio}/>
+      <DebugDisplay
+        state={state}
+        playAudio={playAudio} />
     </div>
   );
 }
