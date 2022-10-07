@@ -3,8 +3,10 @@
   --color-app: #f5f6fa;
   --color-app-secondary: #dcdde1;
   --color-pomodoro: #c23616;
+  --color-pomodoro-out: #487eb0;
+  --color-pomodoro-in: #192a56;
   --color-borders: #7f8fa6;
-  --color-button: #192a56 ;
+  --color-button: #192a56;
 }
 
 body {
@@ -26,15 +28,39 @@ body {
   margin: 10px;
   height: fit-content;
   width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 #app #clock {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30rem;
-  height: 30rem;
+  width: fit-content;
+  height: fit-content;
 }
-#app #clock #pomodoro {
+#app #clock #pomodoro-circle-out {
+  background-color: var(--color-pomodoro);
+  border-radius: 50%;
+  height: 25rem;
+  width: 25rem;
+  background-color: var(--color-pomodoro-out);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#app #clock #pomodoro-circle-out #pomodoro-circle-in {
+  background-color: var(--color-pomodoro);
+  border-radius: 50%;
+  height: 24rem;
+  width: 24rem;
+  background-color: var(--color-pomodoro-in);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#app #clock #pomodoro-circle-out #pomodoro-circle-in #pomodoro {
   background-color: var(--color-pomodoro);
   border-radius: 50%;
   height: 20rem;
@@ -43,7 +69,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-#app #clock #pomodoro #time-left {
+#app #clock #pomodoro-circle-out #pomodoro-circle-in #pomodoro #time-left {
   font-size: 4rem;
   color: white;
 }

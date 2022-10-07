@@ -7,9 +7,14 @@ const ClockComp = (props, ref) => {
 
     return (
         <div id="clock">
-            <div id="pomodoro">
-                <time id="time-left">{time}</time>
+            <div id="pomodoro-circle-out">
+                <div id="pomodoro-circle-in">
+                    <div id="pomodoro">
+                        <time id="time-left">{time}</time>
+                    </div>
+                </div>
             </div>
+
             <p id="timer-label">{currentCounting}</p>
             <div id="controls">
                 <button id="start_stop" onClick={countDown}>start/stop</button>
