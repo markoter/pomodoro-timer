@@ -51,18 +51,18 @@ body {
     #pomodoro-circle-out {
       background-color: var(--color-pomodoro);
       border-radius: 50%;
-      height: 25rem;
-      width: 25rem;
+      height: 23rem;
+      width: 23rem;
       background-color: var(--color-pomodoro-out);
       display: flex;
       justify-content: center;
       align-items: center;
 
-      #pomodoro-circle-in {
+      #pomodoro-progress {
         background-color: var(--color-pomodoro);
         border-radius: 50%;
-        height: 24rem;
-        width: 24rem;
+        height: 22rem;
+        width: 22rem;
         background-color: var(--color-pomodoro-in);
         display: flex;
         justify-content: center;
@@ -76,6 +76,7 @@ body {
           display: flex;
           justify-content: center;
           align-items: center;
+          display: none;
 
           #time-left {
             font-size: 4rem;
@@ -93,7 +94,7 @@ body {
 
     .labels {
       background-color: var(--color-app-secondary);
-      border: 2px solid var(--color-borders);
+      // border: 2px solid var(--color-borders);
       width: 15rem;
       display: flex;
       flex-direction: column;

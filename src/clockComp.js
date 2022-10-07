@@ -8,7 +8,7 @@ const ClockComp = (props, ref) => {
     return (
         <div id="clock">
             <div id="pomodoro-circle-out">
-                <div id="pomodoro-circle-in">
+                <div id="pomodoro-progress">
                     <div id="pomodoro">
                         <time id="time-left">{time}</time>
                     </div>
