@@ -28,8 +28,20 @@ const CircularProgressBar = (props) => {
                 strokeDasharray={[dash, circumference - dash]}
                 strokeLinecap="round"
             />
+            <text
+                fill="black"
+                fontSize="40px"
+                x="50%"
+                y="50%"
+                dy="20px"
+                textAnchor="middle"
+            >
+                {percentage + '%'} 
+            </text>
         </svg>
     )
 
 }
 export default CircularProgressBar
+
+//from https://medium.com/tinyso/how-to-create-an-animated-svg-circular-progress-component-in-react-5123c7d24391
