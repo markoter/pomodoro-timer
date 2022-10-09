@@ -10,7 +10,7 @@ const CircularProgressBar = (props) => {
     // const dash = (progress * circumference) / 100
     const dash = (timer * circumference) / timerFull
 
-    return (
+    return (<div>
         <svg width={size} height={size} viewBox={viewBox}>
             {/* circle for empty  */}
             <circle
@@ -46,9 +46,12 @@ const CircularProgressBar = (props) => {
             </text>
             
         </svg>
+        <p>t is {timer}</p>
+        <p>tFull is {timerFull}</p>
+        </div>
     )
 
 }
 export default CircularProgressBar
 
-//from https://medium.com/tinyso/how-to-create-an-animated-svg-circular-progress-component-in-react-5123c7d24391
+//based on https://medium.com/tinyso/how-to-create-an-animated-svg-circular-progress-component-in-react-5123c7d24391

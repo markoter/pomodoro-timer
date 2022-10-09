@@ -3,15 +3,18 @@ import { forwardRef } from "react"
 import CircularProgressBar from "./circularProgressBar"
 
 const ClockComp = (props, ref) => {
-    const { timer, timerFull, showTime, sessionOn, countDown, reset } = props
+    const { timer, sessionLen, breakLen, showTime, sessionOn, countDown, reset } = props
     const currentCounting = sessionOn ? 'session' : 'break'
+    const color = sessionOn ? 'green' : 'red'
+    const timerFull = sessionOn ? sessionLen : breakLen
+
 
     return (
         <div id="clock">
             <CircularProgressBar 
             size={250} 
             strokeWidth={20}
-            color="green"
+            color={color}
             timer={timer}
             timerFull={timerFull}
             showTime={showTime}

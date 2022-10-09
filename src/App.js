@@ -117,7 +117,8 @@ function App() {
       <h2 id="header">pomodoro timer</h2>
       <ClockComp
         timer={state.timer}
-        timerFull={state.session}
+        sessionLen={state.session}
+        breakLen={state.break}
         showTime={showTime}
         sessionOn={state.sessionOn}
         countDown={countDown}
