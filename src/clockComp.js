@@ -15,7 +15,12 @@ const ClockComp = (props, ref) => {
                     </div>
                 </div>
             </div>
-            <CircularProgressBar size={250} strokeWidth={20}/>
+            <CircularProgressBar 
+            size={250} 
+            strokeWidth={20}
+            percentage={25}
+            color="green"
+            />
 
             <p id="timer-label">{currentCounting}</p>
             <div id="controls">
