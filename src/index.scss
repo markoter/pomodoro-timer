@@ -1,12 +1,12 @@
 :root {
-  --color-background: #0097e6;
+  --color-background: #40739e;
   --color-app: #f5f6fa;
   --color-app-secondary: #dcdde1;
-  --color-pomodoro: #c23616;
-  --color-pomodoro-out: #487eb0;
-  --color-pomodoro-in: #192a56;
   --color-borders: #7f8fa6;
   --color-button: #192a56;
+  // unused here, but in progressBar component
+  --color-pomodoro-session: #e84118;
+  --color-pomodoro-break: #4cd137;
 }
 
 body {
@@ -53,6 +53,7 @@ body {
 
     .labels {
       margin: 2px;
+      padding: 0.5rem;
       background-color: var(--color-app-secondary);
       // border: 2px solid var(--color-borders);
       width: 15rem;
@@ -74,8 +75,10 @@ body {
 button {
   font-size: 1rem;
   margin: 1rem;
+  padding: 6px;
   background-color: var(--color-button);
   color: white;
+  border: none;
 }
 
 .hidden {

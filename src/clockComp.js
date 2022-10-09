@@ -5,13 +5,13 @@ import CircularProgressBar from "./circularProgressBar"
 const ClockComp = (props, ref) => {
     const { timer, sessionLen, breakLen, showTime, sessionOn, countDown, reset } = props
     const currentCounting = sessionOn ? 'session' : 'break'
-    const color = sessionOn ? 'red' : 'blue'
+    const color = sessionOn ? '#e84118' : '#4cd137'
     const timerFull = sessionOn ? sessionLen : breakLen
 
     return (
         <div id="clock">
             <CircularProgressBar 
-            size={250} 
+            size={300} 
             strokeWidth={20}
             color={color}
             timer={timer}

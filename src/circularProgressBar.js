@@ -11,7 +11,7 @@ const CircularProgressBar = (props) => {
             {/* circle for empty  */}
             <circle
                 fill="none"
-                stroke="#ccc"
+                stroke="#dcdde1"
                 cx={size / 2}
                 cy={size / 2}
                 r={radius}
@@ -32,7 +32,7 @@ const CircularProgressBar = (props) => {
             <text
                 id="time-left"
                 fill="black"
-                fontSize="40px"
+                fontSize="60px"
                 x="50%"
                 y="50%"
                 dy="20px"
