@@ -5,9 +5,8 @@ import CircularProgressBar from "./circularProgressBar"
 const ClockComp = (props, ref) => {
     const { timer, sessionLen, breakLen, showTime, sessionOn, countDown, reset } = props
     const currentCounting = sessionOn ? 'session' : 'break'
-    const color = sessionOn ? 'green' : 'red'
+    const color = sessionOn ? 'red' : 'blue'
     const timerFull = sessionOn ? sessionLen : breakLen
-
 
     return (
         <div id="clock">
@@ -19,7 +18,6 @@ const ClockComp = (props, ref) => {
             timerFull={timerFull}
             showTime={showTime}
             />
-
             <p id="timer-label">{currentCounting}</p>
             <div id="controls">
                 <button id="start_stop" onClick={countDown}>start/stop</button>

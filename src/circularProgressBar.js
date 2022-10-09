@@ -1,16 +1,12 @@
 const CircularProgressBar = (props) => {
     const { size, strokeWidth, color, timer, timerFull, showTime } = props
-    // const [progress, setProgress] = useState(0)
-    // useEffect(() => {
-    //     setProgress(percentage)
-    // }, [percentage])
+  
     const viewBox = `0 0 ${size} ${size}`
     const radius = (size - strokeWidth) / 2
     const circumference = radius * Math.PI * 2
-    // const dash = (progress * circumference) / 100
     const dash = ((timerFull - timer) * circumference) / timerFull
 
-    return (<div>
+    return (
         <svg width={size} height={size} viewBox={viewBox}>
             {/* circle for empty  */}
             <circle
@@ -46,10 +42,6 @@ const CircularProgressBar = (props) => {
             </text>
             
         </svg>
-        <p>t is {timer}</p>
-        <p>tFull is {timerFull}</p>
-        <p>dash is {dash}</p>
-        </div>
     )
 
 }
