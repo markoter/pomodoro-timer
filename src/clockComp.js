@@ -1,20 +1,23 @@
 import audio from "./timer-beep.wav"
 import { forwardRef } from "react"
+import CircularProgressBar from "./circularProgressBar"
 
 const ClockComp = (props, ref) => {
-    const { time, sessionOn, countDown, reset } = props
+    const { timer, sessionLen, breakLen, showTime, sessionOn, countDown, reset } = props
     const currentCounting = sessionOn ? 'session' : 'break'
+    const color = sessionOn ? '#e84118' : '#4cd137'
+    const timerFull = sessionOn ? sessionLen : breakLen
 
     return (
         <div id="clock">
-            <div id="pomodoro-circle-out">
-                <div id="pomodoro-progress">
-                    <div id="pomodoro">
-                        <time id="time-left">{time}</time>
-                    </div>
-                </div>
-            </div>
-
+            <CircularProgressBar 
+            size={300} 
+            strokeWidth={20}
+            color={color}
+            timer={timer}
+            timerFull={timerFull}
+            showTime={showTime}
+            />
             <p id="timer-label">{currentCounting}</p>
             <div id="controls">
                 <button id="start_stop" onClick={countDown}>start/stop</button>
