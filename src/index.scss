@@ -46,47 +46,6 @@ body {
     align-items: center;
     width: fit-content;
     height: fit-content;
-
-    #pomodoro-circle-out {
-      background-color: var(--color-pomodoro);
-      border-radius: 50%;
-      height: 23rem;
-      width: 23rem;
-      background-color: var(--color-pomodoro-out);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      //todo hide for now
-      display: none;
-
-      #pomodoro-progress {
-        background-color: var(--color-pomodoro);
-        border-radius: 50%;
-        height: 22rem;
-        width: 22rem;
-        background-color: var(--color-pomodoro-in);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        #pomodoro {
-          background-color: var(--color-pomodoro);
-          border-radius: 50%;
-          height: 20rem;
-          width: 20rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          #time-left {
-            font-size: 4rem;
-            color: white;
-          }
-        }
-      }
-    }
-
-
   }
 
   #controllers-part {

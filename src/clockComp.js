@@ -3,24 +3,18 @@ import { forwardRef } from "react"
 import CircularProgressBar from "./circularProgressBar"
 
 const ClockComp = (props, ref) => {
-    const { time, sessionOn, countDown, reset } = props
+    const { timer, timerFull, showTime, sessionOn, countDown, reset } = props
     const currentCounting = sessionOn ? 'session' : 'break'
 
     return (
         <div id="clock">
-            <div id="pomodoro-circle-out">
-                <div id="pomodoro-progress">
-                    <div id="pomodoro">
-                        <time id="time-left">{time}</time>
-                    </div>
-                </div>
-            </div>
             <CircularProgressBar 
             size={250} 
             strokeWidth={20}
-            percentage={44}
             color="green"
-            time={time}
+            timer={timer}
+            timerFull={timerFull}
+            showTime={showTime}
             />
 
             <p id="timer-label">{currentCounting}</p>

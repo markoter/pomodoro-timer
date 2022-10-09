@@ -108,7 +108,7 @@ function App() {
           // reset()
         }
       }
-    }, 1000)
+    }, 10)
     return () => clearInterval(counter)
   }, [state, playAudio])
 
@@ -116,7 +116,9 @@ function App() {
     <div id="app">
       <h2 id="header">pomodoro timer</h2>
       <ClockComp
-        time={showTime(state.timer)}
+        timer={state.timer}
+        timerFull={state.session}
+        showTime={showTime}
         sessionOn={state.sessionOn}
         countDown={countDown}
         reset={reset}
