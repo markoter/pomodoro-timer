@@ -18,7 +18,7 @@ const ClockComp = (props, ref) => {
             <CircularProgressBar 
             size={250} 
             strokeWidth={20}
-            percentage={25}
+            percentage={44}
             color="green"
             />
 
