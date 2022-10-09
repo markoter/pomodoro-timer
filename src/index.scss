@@ -39,7 +39,6 @@ body {
   justify-content: center;
   align-items: center;
 
-  #header {}
 
   #clock {
     display: flex;
@@ -76,7 +75,6 @@ body {
           display: flex;
           justify-content: center;
           align-items: center;
-          display: none;
 
           #time-left {
             font-size: 4rem;
@@ -93,6 +91,7 @@ body {
     display: flex;
 
     .labels {
+      margin: 2px;
       background-color: var(--color-app-secondary);
       // border: 2px solid var(--color-borders);
       width: 15rem;
