@@ -114,7 +114,7 @@ function App() {
 
   return (
     <div id="app">
-      This is app
+      <h2 id="header">pomodoro timer</h2>
       <ClockComp
         time={showTime(state.timer)}
         sessionOn={state.sessionOn}

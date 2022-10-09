@@ -4,7 +4,7 @@ const Controllers = (props) => {
     const { state, handlePlusMinus, returnMinutes } = props
 
     return (
-        <div id="labels-part">
+        <div id="controllers-part">
             <Label
                 id={'session'}
                 state={state}
