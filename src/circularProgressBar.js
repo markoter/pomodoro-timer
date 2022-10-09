@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 
 const CircularProgressBar = (props) => {
-    const { size, strokeWidth, percentage, color } = props
+    const { size, strokeWidth, percentage, color, time } = props
     const [progress, setProgress] = useState(0)
-    useEffect(()=> {
+    useEffect(() => {
         setProgress(percentage)
-    },[percentage])
+    }, [percentage])
 
     const viewBox = `0 0 ${size} ${size}`
     const radius = (size - strokeWidth) / 2
@@ -34,9 +34,10 @@ const CircularProgressBar = (props) => {
                 transform={`rotate(-90 ${size / 2} ${size / 2})`}
                 strokeDasharray={[dash, circumference - dash]}
                 strokeLinecap="round"
-                style={{transition: "all 5s"}}
+                style={{ transition: "all 5s" }}
             />
             <text
+                id="time-left"
                 fill="black"
                 fontSize="40px"
                 x="50%"
@@ -44,7 +45,7 @@ const CircularProgressBar = (props) => {
                 dy="20px"
                 textAnchor="middle"
             >
-                {percentage + '%'} 
+                {time}
             </text>
         </svg>
     )

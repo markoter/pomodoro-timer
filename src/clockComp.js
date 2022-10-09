@@ -20,6 +20,7 @@ const ClockComp = (props, ref) => {
             strokeWidth={20}
             percentage={44}
             color="green"
+            time={time}
             />
 
             <p id="timer-label">{currentCounting}</p>
