@@ -1,5 +1,6 @@
 import audio from "./timer-beep.wav"
 import { forwardRef } from "react"
+import CircularProgressBar from "./circularProgressBar"
 
 const ClockComp = (props, ref) => {
     const { time, sessionOn, countDown, reset } = props
@@ -14,6 +15,7 @@ const ClockComp = (props, ref) => {
                     </div>
                 </div>
             </div>
+            <CircularProgressBar size={250} strokeWidth={20}/>
 
             <p id="timer-label">{currentCounting}</p>
             <div id="controls">

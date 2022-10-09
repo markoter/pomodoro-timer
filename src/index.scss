@@ -56,6 +56,8 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
+      //todo hide for now
+      display: none;
 
       #pomodoro-progress {
         background-color: var(--color-pomodoro);

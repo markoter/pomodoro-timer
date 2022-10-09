@@ -1,5 +1,5 @@
 const CircularProgressBar = (props) => {
-    const { ResizeObserverSize, strokeWidth } = props
+    const { size, strokeWidth } = props
     const viewBox = `0 0 ${size} ${size}`
     const radius = (size - strokeWidth) / 2
 

@@ -49,6 +49,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  display: none;
 }
 #app #clock #pomodoro-circle-out #pomodoro-progress {
   background-color: var(--color-pomodoro);
