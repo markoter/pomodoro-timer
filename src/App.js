@@ -108,7 +108,7 @@ function App() {
           // reset()
         }
       }
-    }, 10)
+    }, 1000)
     return () => clearInterval(counter)
   }, [state, playAudio])
 
